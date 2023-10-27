@@ -11,14 +11,14 @@ import { useEffect, useState } from 'react';
 
 const AuthProvider: NextPage<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
-  const [authorised, setAuthorised] = useState(false);
+  const [authorised, setAuthorised] = useState(true);
   const dispatch = useAppDispatch();
   const { is_email_confirmed, access, refresh } = useAppSelector((state) =>
     selectCredentials(state)
   );
 
   const checkIsAuth = () => {
-    if (access) {
+    if (access !== null) {
       setAuthorised(true);
     } else {
       setAuthorised(false);

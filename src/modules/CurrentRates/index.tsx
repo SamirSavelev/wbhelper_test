@@ -12,18 +12,20 @@ import Button from '@/src/ui-kit/Button';
 
 const { Container } = currentRatesStyles;
 
-const CurrentRates: NextPage = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [selectedType, setSelectedType] = useState<DropdownItemInterface>(
-    typeList[0]
-  );
-
-  const onChangeNetwork = (item: DropdownItemInterface) => {
-    setSelectedType(item);
-  };
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
-    setSearchValue(event.target.value);
-
+interface Props {
+  searchValue: string;
+  selectedType: DropdownItemInterface;
+  onChangeType(item: DropdownItemInterface): void;
+  onChangeSearchValue(event: ChangeEvent<HTMLInputElement>): void;
+  searchHandler(): void;
+}
+const CurrentRates: NextPage<Props> = ({
+  searchValue,
+  selectedType,
+  onChangeType,
+  onChangeSearchValue,
+  searchHandler,
+}) => {
   return (
     <Container
       flexDirection="column"
@@ -42,11 +44,11 @@ const CurrentRates: NextPage = () => {
         <Dropdown
           menu={typeList}
           selected={selectedType}
-          onChange={onChangeNetwork}
+          onChange={onChangeType}
         />
         <Input
           value={searchValue}
-          onChange={onChangeHandler}
+          onChange={onChangeSearchValue}
           placeholder="Поиск по названию или артикулу"
           postfix={<SearchIcon />}
         />
@@ -54,7 +56,7 @@ const CurrentRates: NextPage = () => {
           <Button
             pattern="primary"
             size="large"
-            onClick={() => {}}
+            onClick={searchHandler}
             width="224px"
           >
             Найти

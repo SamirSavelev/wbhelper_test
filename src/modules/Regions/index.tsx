@@ -6,11 +6,14 @@ import Region from './components/Region';
 
 interface Props {
   regions: Array<ArrayItem>;
+  onChangeRegion(id: number): void;
+  selectedRegion: number;
 }
-const Regions: NextPage<Props> = ({ regions }) => {
-  const [selected, setSelected] = useState(0);
-
-  const selectRegion = (id: number) => setSelected(id);
+const Regions: NextPage<Props> = ({
+  regions,
+  onChangeRegion,
+  selectedRegion,
+}) => {
   return (
     <Flex
       flexDirection="row"
@@ -21,8 +24,8 @@ const Regions: NextPage<Props> = ({ regions }) => {
     >
       {regions.map((region) => (
         <Region
-          selected={selected === region.id}
-          onClick={() => selectRegion(region.id)}
+          selected={selectedRegion === region.id}
+          onClick={() => onChangeRegion(region.id)}
           {...region}
         />
       ))}

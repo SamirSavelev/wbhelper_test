@@ -10,7 +10,7 @@ export const authInitialState: AuthInitialStateInterface = {
 };
 
 const slice = createSlice({
-  name: 'wb',
+  name: 'auth',
   initialState: authInitialState,
   reducers: {
     setCredentials: (

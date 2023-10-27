@@ -1,5 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import type { LoginRequestInterface, LoginResponseInterface } from './types';
+import type {
+  GetAdvertsRequestInterface,
+  GetAdvertsResponceInterface,
+  LoginRequestInterface,
+  LoginResponseInterface,
+} from './types';
 import { baseQueryInterceptor } from '../config';
 import { ArrayItem } from '@/src/features/types';
 
@@ -7,9 +12,12 @@ export const wbApi = createApi({
   reducerPath: 'wbApi',
   baseQuery: baseQueryInterceptor,
   endpoints: (builder) => ({
-    getAdverts: builder.query<any, void>({
-      query() {
-        return `/api/v1/wb/adverts/`;
+    getAdverts: builder.query<
+      GetAdvertsResponceInterface,
+      GetAdvertsRequestInterface
+    >({
+      query({ input, type, region_id }) {
+        return `/api/v1/wb/adverts/?input=${input}&type=${type}&region_id=${region_id}`;
       },
     }),
     getCatalogs: builder.query<Array<Array<ArrayItem>>, void>({
