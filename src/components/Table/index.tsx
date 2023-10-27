@@ -115,7 +115,6 @@ const Table: NextPage<Props> = ({ data }) => {
     },
   });
 
-  console.log('ss', table.getPageCount());
   return (
     <Wrapper>
       <StyledTable>
